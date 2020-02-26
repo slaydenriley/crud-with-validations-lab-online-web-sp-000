@@ -15,6 +15,12 @@ class SongsController < ApplicationController
   end
 
   def new
-    @song = Song.new(params)
+    @song = Song.new(song_params)
+    if @song.valid?
+      @song.save
+      redirect_to song_path_show
+    else
+      render :new
+    end
   end
 end
